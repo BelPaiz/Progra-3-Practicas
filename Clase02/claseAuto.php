@@ -56,6 +56,17 @@ class Auto
         }
         return $sumaPrecios;
     }
+    public function Compare(Auto $auto1, Auto $auto2)
+    {
+        if(($auto1->_marca == $auto2->_marca) && ($auto1->_color == $auto2->_color) && ($auto1->_precio == $auto2->_precio))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }
 ?>
