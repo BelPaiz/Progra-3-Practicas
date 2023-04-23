@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+        //las tres formas sirven para crear una funcion
+        function suma1(a,b)
+        {
+            return a+b;
+        }
+        var suma2 = function(a,b){return a+b;}
+        var suma3 = (a,b)=>{return a+b;}
+
+        //alert("alerta");
+
+        
+
+        let n1 = "1";
+        let n2 = 1;
+        console.log(n1 == n2);
+        console.log(n1 === n2);
+        let n3 = parseInt("20");
+        console.log(n3 + 1);
+
+        let n4 = parseFloat("20.2538");
+        console.log(n4 + 5);
+
+        console.log(isNaN("a"));
+        console.log(isNaN("2535.52"));*/
+
+        function $(id)
+        {
+            return document.getElementById(id);
+        }
+
+        function sumaTxt()
+        {
+            let n1 = parseFloat($("txtN1").value);
+            let n2 = parseFloat($("txtN2").value);
+            $("txtResultado").value = (n1+n2).toString();
+        }
+
+        //$("btnSumar").addEventListener("click", sumaTxt );
+        window.addEventListener("load", ()=>{
+            $("btnSumar").addEventListener("click", sumaTxt );
+
+            let boton = document.createElement("button");
+            let texto = document.createTextNode("Mi super ultra boton");
+
+            boton.appendChild(texto);
+            $("cuerpo").appendChild(boton);
+        });
+
+        
+        
+
+        
+        
+    </script>
+</head>
+<body>
+    <label>Numero1</label><br>
+    <input id="txtN1" type="text"><br>
+
+    <label>Numero2</label><br>
+    <input id="txtN2" type="text"><br>
+
+    <button id="btnSumar">Sumar</button>
+
+    <label>Resultado</label><br>
+    <input id="txtResultado" type="text"><br>
+</body>
+</html>
