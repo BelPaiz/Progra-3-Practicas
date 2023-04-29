@@ -1,0 +1,37 @@
+/*Paiz Belen*/
+
+/*1*/SELECT * FROM usuario ORDER BY nombre ASC
+
+/*2*/SELECT * FROM `producto` WHERE tipo = 'liquido'
+
+/*3*/SELECT * FROM `venta` WHERE cantidad<=10 AND cantidad>=6 
+
+/*4*/SELECT SUM(ALL cantidad) FROM venta
+
+/*5*/SELECT id_producto FROM venta ORDER BY fecha_de_venta LIMIT 3
+
+/*6*/SELECT v.id, u.nombre, p.nombre FROM venta v INNER JOIN usuario u ON v.id_usuario = u.id INNER JOIN producto p ON v.id_producto = p.id
+
+/*7*/SELECT v.id, (v.cantidad * p.precio) FROM venta v INNER JOIN producto p ON v.id_producto = p.id
+
+/*8*/SELECT SUM(ALL cantidad) FROM venta WHERE id_producto = 1003 AND id_usuario = 104
+
+/*9*/SELECT v.id_producto, v.id_usuario, v.cantidad, u.localidad FROM venta v INNER JOIN usuario u ON v.id_usuario = u.id WHERE u.localidad = 'Avellaneda'
+
+/*10*/SELECT * FROM usuario WHERE nombre LIKE '%u%'
+
+/*11*/SELECT * FROM venta WHERE fecha_de_venta >= cast('2020-06-01' AS date) AND fecha_de_venta <= cast('2021-02-01' AS date)
+
+/*12*/SELECT * FROM usuario WHERE fecha_de_registro <= cast('2021-01-01' AS date)
+
+/*13*/INSERT INTO producto (nombre, tipo, precio) VALUES ('Chocolate', 'solido', 25.35)
+
+/*14*/INSERT INTO usuario (nombre, apellido, clave, mail,fecha_de_registro, localidad) VALUES ('Jose', 'Pereza', 1528, 'jpz@hola.com', cast('2023-04-25' AS date), 'Avellaneda')
+
+/*15*/UPDATE producto SET precio = 66.60 WHERE tipo = 'solido'
+
+/*16*/UPDATE producto SET stock = 0 WHERE stock <= 20
+
+/*17*/DELETE FROM producto WHERE id = 1010
+
+/*18*/DELETE usuario FROM usuario  INNER JOIN venta v ON v.id_usuario = usuario.id WHERE v.cantidad = 0
