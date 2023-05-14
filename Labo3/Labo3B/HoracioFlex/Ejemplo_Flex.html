@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cuerpo{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #formulario1{
+            display: flex;
+            flex-direction: column;
+            background-color: aqua;
+            width: 25%;
+            height: 50%;
+        }
+        #formulario2{
+            display: flex;
+            flex-direction: column;
+            background-color: red;
+            width: 25%;
+            height: 50%;
+        }
+
+        .linea{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .item{
+            width: 33%;
+        }
+
+        .input{
+            width: 90%;
+        }
+
+    </style>
+</head>
+<body id="cuerpo">
+    <div id="formulario1">
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea3" class="linea">
+            <button id="btn1">Ocultar Cian</button>
+        </div>
+    </div>
+    <div id="formulario2">
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea1" class="linea">
+            <div class="item">
+                <label>Apellido:</label><br>
+                <input type="text">
+            </div>
+            <div class="item">
+                <label>Nombre:</label><br>
+                <input type="text">
+            </div>
+        </div>
+        <div id="linea3" class="linea">
+            <button id="btn2">Ocultar Rojo</button>
+        </div>
+    </div>
+</body>
+<script>
+    function $(id){
+        return document.getElementById(id);
+    }
+
+    $("btn1").addEventListener("click",(e)=>{
+        $("formulario1").style.display="none";
+        $("formulario2").style.display="flex";
+        console.log(e.currentTarget);
+    });
+
+    $("btn2").addEventListener("click",(e)=>{
+        $("formulario1").style.display="flex";
+        $("formulario2").style.display="none";
+        console.log(e.currentTarget);
+    });
+
+</script>
+    
+
+
+
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    <script>
+
+        // const obj1 = new Object();
+        // const obj2 = {};
+
+        // const obj3 = {
+        //     nombre:"Juan",//clave:valor
+        //     edad:30,
+        //     hambre:true,
+
+        // }
+        // console.log(obj1);
+        // console.log(obj2);
+        //console.log(obj3.nombre);
+        // console.log(obj3["nombre"]);
+        // for (const key in obj3) {
+        //    console.log(key, obj3[key]);
+        // }
+        function Persona(nombre, edad, hambre, apodo){
+            this.nombre = nombre;
+            let _apodo = apodo; // podria ser como un atributo privado
+            this.edad = edad;
+            this.hambre = hambre;
+
+            this.setApodo = function(value){
+                _apodo = value;
+            };
+
+            this.getApodo = function(){
+                return _apodo;
+            };
+        }
+        Persona.prototype.saludar = function(){
+                console.log("Hola yo soy", this.getApodo());
+            };
+
+
+        function Empleado(legajo, nombre, edad, hambre, apodo){
+            
+            let _legajo = legajo;
+            Persona.call(this, nombre, edad, hambre, apodo);
+
+            this.setLegajo = function(value){
+                _legajo = value;
+            };
+            this.getLegajo = function(){
+                return legajo;
+            };
+        }
+        //le asigno al prototipo de empleado, el de persona
+        Object.setPrototypeOf(Empleado.prototype, Persona.prototype);
+
+        const p1 = new Persona("Jose", 45, true, "Josheshito");
+
+        const e1 = new Empleado(1234, "Uriel", 30, true, "Urielsiño");
+        console.log(p1);
+        p1.saludar();
+        console.log(p1.getApodo());
+        console.log(e1);
+        e1.saludar();
+
+
+
+
+    </script>
+</body>
+</html>

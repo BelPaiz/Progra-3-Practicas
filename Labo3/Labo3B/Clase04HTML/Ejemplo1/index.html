@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase04</title>
+</head>
+<body>
+  <details>
+    <summary>HolaHolaAcaEstoy</summary>
+    <h2>Lorem</h2>
+    <p>Lorem ipsum dolor sit amet consectetur
+       adipisicing elit. Quis nesciunt reiciendis
+        eos. Facilis itaque ab mollitia quae, 
+        velit sequi ipsa ut, excepturi error maiores 
+      vel impedit ipsam iusto, quisquam dolor.</p>
+  </details>
+   <dialog style="height: 400px; width: 500px;" open id="dialog">
+    <button id="btnCerrar">
+      <img src="./assets/cancel.png" height="40px" alt=""> 
+    </button>
+    <h2>Soy una ventana modal</h2>
+    <img src="./img/login.png" alt="logo login" height="200px" width="200px">
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Facere aliquid molestias explicabo 
+      quaerat harum ab quae accusamus, modi 
+      eos unde, aperiam, natus deleniti veniam
+       illum? Corporis totam laudantium dolor eligendi!</p>
+   </dialog>
+  
+    <!--<button id="miBoton">Click me</button>-->
+    <form>
+        <label for="txtNombre">Nombre</label>
+        <input id="txtNombre" autocomplete="off" name="nombre" type="text" placeholder="Ingrese nombre"/>
+  
+        <br /><br />
+  
+        <label for="txtPass">Contraseña</label>
+        <input id="txtPass" name="pass" type="password" />
+  
+        <br /><br />
+        
+        <label for="txtNumbre">Numero</label>
+        <input id="txtNumbre" max="20" min="10" name="numero" type="number" value="10"/>
+        <br /><br />
+        
+        <label for="txtColor">Color</label>
+        <input id="txtColor" name="color" type="color" />
+        <br /><br />
+  
+        <label for="txtFecha">Fecha</label>
+        <input id="txtFecha" name="fecha" type="date" />
+        <br /><br />
+  
+        <label for="txtFile">Archivo</label>
+        <input id="txtFile" name="" type="file" />
+        <br /><br />
+  
+        <label for="txtMail">Mail</label>
+        <input id="txtMail"  name="mail"  type="email"/>
+        <br /><br />
+  
+        <label for="txtUrl">URL</label>
+        <input id="txtUrl"  name="url" type="url" />
+        <br><br>
+        <fieldset>
+          <legend>Seleccione deporte</legend>
+          <!--al ponerles el mismo name se enlazan y solo puedo elegir uno por vez-->
+          <input type="radio" name="deporte" value="futbol"> Futbol <br>
+          <input type="radio"name="deporte" value="rugby"> Rugby <br>
+          <input type="radio"name="deporte" value="natacion"> Natacion <br>
+        </fieldset>
+        <fieldset>
+          <legend>Seleccione deporte</legend>
+          <!--al ponerles el mismo name se enlazan y solo puedo elegir uno por vez-->
+          <input type="checkbox" name="dep" value="futbol"> Futbol <br>
+          <input type="checkbox"name="dep" value="rugby"> Rugby <br>
+          <input type="checkbox"name="dep" value="natacion"> Natacion <br>
+        </fieldset>
+        <br><br><br>
+        <label for="cboFrutas">Frutas:</label>
+        <!--puedo enlazar con la propiedad for del label y el id del select-->
+        <select name="" id="cboFrutas" multiple>
+          <option value="0">Banana</option>
+          <option value="1">Manzana</option>
+          <option value="2">Melon</option>
+          <option value="3">Pera</option>
+        </select>
+        <br><br>
+        <label for="">Comentarios:</label><br>
+        <textarea name="" id="" cols="10" rows="5"></textarea>
+        <br><br><!--
+        <video src="./media/sonic_el_mestizo.mp4" controls width="150px" ></video>
+        <br><br>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/sFRJTvCTQxI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <br><br>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13131.023270629536!2d-58.375034571300255!3d-34.63561046888528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a334b6925e5473%3A0x1ca5b2748858b40d!2sEstadio%20Alberto%20J.%20Armando-%20La%20Bombonera!5e0!3m2!1ses!2sar!4v1682834431470!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        --><BR></BR>
+        <button>Enviar Datos</button>
+        <!-- <input type="submit" value="alta usuario" />-->
+        <input type="reset">
+      </form>
+
+      <button id="btnAbrirModal">Abrir Modal</button>
+
+    <script>
+      
+
+      document.getElementById('btnCerrar').addEventListener('click', ()=>{
+        document.getElementById('dialog').close();
+      })
+      document.getElementById('btnAbrirModal').addEventListener('click', ()=>{
+        document.getElementById('dialog').showModal();
+      })
+
+      /*console.log(document.getElementsByTagName('form'));
+      console.log(document.forms[0]);*/
+      document.forms[0].addEventListener('submit', (e)=>{
+        e.preventDefault();
+        alert("se cancelo el submit");
+      })
+    </script>
+</body>
+</html>

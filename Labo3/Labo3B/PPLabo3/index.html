@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPLabo3PaizBelen</title>
+    <style>
+      table,
+      th,
+      td {
+        table-layout: fixed;
+        width: 100% fit-content;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: auto;
+      }
+      #formDatos {
+        border: 2px solid black;
+        background-color: rgb(179, 233, 221);
+        display: flex;
+        flex-direction: column;
+      }
+      #formAbm {
+        border: 2px solid black;
+        background-color: rgb(255, 255, 191);
+        display: flex;
+        flex-direction: column;
+        width: 75%;
+        align-items: center;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body id="cuerpo" onload="insertarTabla()">
+    <div id="formDatos" style="display: flex">
+      <form name="formDatos">
+        <label>Form Datos</label><br />
+        <label for="cboFiltrar">Filtrar Por: </label>
+        <select
+          name=""
+          id="cboFiltrar"
+          onchange="ValorSeleccionFiltro('cboFiltrar'); insertarTabla()"
+        >
+          <option value="0">Seleccione</option>
+          <option value="1">Todos</option>
+          <option value="2">Heroes</option>
+          <option value="3">Villanos</option>
+        </select>
+        <br /><br />
+        <label for="promEdad">Calcular Edad Promedio</label>
+        <input type="text" id="promEdad" value="" />
+        <input
+          type="button"
+          id="btnCalcular"
+          value="Calcular"
+          onclick="MostrarPromedioEdad()"
+        />
+        <br /><br />
+        <fieldset>
+          <legend>Mostrar Columnas:</legend>
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_id"
+            checked
+            onclick="valorCheckbox('ckb_id', 'colid')"
+          />
+          Id
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_nombre"
+            checked
+            onclick="valorCheckbox('ckb_nombre', 'colNombre')"
+          />
+          Nombre
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_apellido"
+            checked
+            onclick="valorCheckbox('ckb_apellido', 'colApellido')"
+          />
+          Apellido
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_edad"
+            checked
+            onclick="valorCheckbox('ckb_edad', 'colEdad')"
+          />
+          Edad
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_alterEgo"
+            checked
+            onclick="valorCheckbox('ckb_alterEgo', 'colAlterEgo')"
+          />
+          AlterEgo
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_ciudad"
+            checked
+            onclick="valorCheckbox('ckb_ciudad', 'colCiudad')"
+          />
+          Ciudad
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_publicado"
+            checked
+            onclick="valorCheckbox('ckb_publicado', 'colPublicado')"
+          />
+          Publicado
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_enemigos"
+            checked
+            onclick="valorCheckbox('ckb_enemigos', 'colEnemigo')"
+          />
+          Enemigo
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_robos"
+            checked
+            onclick="valorCheckbox('ckb_robos', 'colRobos')"
+          />
+          Robos
+          <input
+            type="checkbox"
+            name="atributos"
+            id="ckb_asesinatos"
+            checked
+            onclick="valorCheckbox('ckb_asesinatos', 'colAsesinatos')"
+          />
+          Asesinatos
+        </fieldset>
+        <br /><br />
+        <div class="container" id="listado"></div>
+        <br /><br />
+        <input
+          id="btnAgregar"
+          type="button"
+          value="Agregar"
+          onclick="PressBtnAgregar()"
+        />
+      </form>
+    </div>
+    <div id="formAbm" style="display: none">
+      <form name="formAbm">
+        <h2><label>Formulario ABM</label></h2>
+        <fieldset>
+          <legend>Datos Personales:</legend>
+          <label for="campoId" aria-readonly>Id: </label>
+          <input
+            type="number"
+            id="campoId"
+            readonly
+            placeholder="Se generara automaticamente"
+            value=""
+          />
+          <br />
+          <label for="campoNombre">Nombre: </label>
+          <input
+            type="text"
+            placeholder="Ingrese nombre"
+            id="campoNombre"
+            value=""
+            onkeypress="return (event.charCode == 209 || 
+            event.charCode == 241 || (event.charCode >= 65 
+            && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          />
+          <br />
+          <label for="campoApellido">Apellido: </label>
+          <input
+            type="text"
+            placeholder="Ingrese apellido"
+            id="campoApellido"
+            value=""
+            onkeypress="return (event.charCode == 209 || 
+            event.charCode == 241 || (event.charCode >= 65 
+            && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+          />
+          <br />
+          <label for="campoEdad">Edad: </label>
+          <input
+            type="number"
+            id="campoEdad"
+            max="99"
+            min="15"
+            value="15"
+            onchange="if(this.value < 15) this.value = 15;"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+          />
+        </fieldset>
+        <br />
+        <label for="cboTipo">Tipo de usuario: </label>
+        <select name="" id="cboTipo" onclick="SeleccionTipoEnAbm()">
+          <option value="0">Heroe</option>
+          <option value="1">Villano</option>
+        </select>
+        <br />
+        <br />
+
+        <div id="tipoHeroe" style="display: none">
+          <fieldset>
+            <legend>Datos del Heroe:</legend>
+            <label for="campoAlterEgo">AlterEgo: </label>
+            <input
+              type="text"
+              id="campoAlterEgo"
+              placeholder="Ingrese alterego"
+              value=""
+              onkeypress="return (event.charCode == 209 || 
+              event.charCode == 241 || (event.charCode >= 65 
+              && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            />
+            <br />
+            <label for="campoCiudad">Ciudad: </label>
+            <input
+              type="text"
+              id="campoCiudad"
+              placeholder="Ingrese ciudad"
+              value=""
+              onkeypress="return (event.charCode == 209 || 
+              event.charCode == 241 || (event.charCode >= 65 
+              && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            />
+            <br />
+            <label for="campoPublicado">Publicados: </label>
+            <input
+              type="number"
+              id="campoPublicado"
+              placeholder="Ingrese publicados"
+              min="1940"
+              value=""
+              onchange="if(this.value < 1940) this.value = 1940;"
+              onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            />
+            <br />
+          </fieldset>
+        </div>
+        <div id="tipoVillano" style="display: none">
+          <fieldset>
+            <legend>Datos del Villano:</legend>
+            <label for="campoEnemigo">Enemigo: </label>
+            <input
+              type="text"
+              id="campoEnemigo"
+              placeholder="Ingrese enemigo"
+              value=""
+              onkeypress="return (event.charCode == 209 || 
+              event.charCode == 241 || (event.charCode >= 65 
+              && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            />
+            <br />
+            <label for="campoRobos">Robos: </label>
+            <input
+              type="number"
+              id="campoRobos"
+              placeholder="Ingrese robos"
+              min="0"
+              value=""
+              onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            />
+            <br />
+            <label for="campoAsesinatos">Asesinatos: </label>
+            <input
+              type="number"
+              id="campoAsesinatos"
+              placeholder="Ingrese asesinatos"
+              min="0"
+              value=""
+              onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+            />
+            <br />
+          </fieldset>
+        </div>
+        <br />
+        <input
+          id="btnAceptar"
+          type="button"
+          value="Alta nuevo usuario"
+          onclick="PressBtnAlta()"
+        />
+        <input
+          id="btnModificar"
+          type="button"
+          value="Modificar"
+          onclick="PressBtnModificar()"
+        />
+        <input
+          id="btnCalncelar"
+          type="button"
+          value="Cancelar"
+          onclick="PressBtnCancelar()"
+        />
+        <input
+          id="btnEliminarUsuario"
+          type="button"
+          value="Eliminar Usuario"
+          onclick="PressBtnEliminarUsuario()"
+        />
+        <br /><br />
+      </form>
+    </div>
+
+    <script>
+      let idHeroes = 1;
+      let idVillanos = 100;
+      class Persona {
+        constructor(id, nombre, apellido, edad) {
+          this.id = id;
+          this.nombre = nombre;
+          this.apellido = apellido;
+          this.edad = edad;
+        }
+      }
+      class Heroe extends Persona {
+        constructor(
+          id = 0,
+          nombre,
+          apellido,
+          edad,
+          alterEgo,
+          ciudad,
+          publicado
+        ) {
+          if (id == 0) {
+            super(idHeroes, nombre, apellido, edad);
+            this.alterEgo = alterEgo;
+            this.ciudad = ciudad;
+            this.publicado = publicado;
+            idHeroes++;
+          } else {
+            super(id, nombre, apellido, edad);
+            this.alterEgo = alterEgo;
+            this.ciudad = ciudad;
+            this.publicado = publicado;
+          }
+        }
+      }
+      class Villano extends Persona {
+        constructor(
+          id = 0,
+          nombre,
+          apellido,
+          edad,
+          enemigo,
+          robos,
+          asesinatos
+        ) {
+          if (id == 0) {
+            super(idVillanos, nombre, apellido, edad);
+            this.enemigo = enemigo;
+            this.robos = robos;
+            this.asesinatos = asesinatos;
+            idVillanos++;
+          } else {
+            super(id, nombre, apellido, edad);
+            this.enemigo = enemigo;
+            this.robos = robos;
+            this.asesinatos = asesinatos;
+          }
+        }
+      }
+      let json =
+        '[{"id":1, "nombre":"Clark","apellido":"Kent", "edad":45, "alterEgo":"Superman", "ciudad":"Metropolis","publicado":2002},\
+      {"id":2, "nombre":"Bruce", "apellido":"Wayne", "edad":35, "alterEgo":"Batman", "ciudad":"Gotica","publicado":20012},\
+      {"id":3, "nombre":"Bart", "apellido":"Alen", "edad":30, "alterEgo":"Flash", "ciudad":"Central","publicado":2017},\
+      {"id":4, "nombre":"Lex", "apellido":"Luthor", "edad":18, "enemigo":"Superman", "robos":500,"asesinatos":7},\
+      {"id":5, "nombre":"Harvey", "apellido":"Dent", "edad":20, "enemigo":"Batman", "robos":750,"asesinatos":2},\
+      {"id":666, "nombre":"Celina", "apellido":"kyle", "edad":23, "enemigo":"Batman", "robos":25,"asesinatos":1}]';
+
+      let buffer = JSON.parse(json);
+      console.log(buffer);
+
+      let heroes = buffer
+        .filter((el) => {
+          if (el.alterEgo != null) {
+            return true;
+          }
+        })
+        .map((el) => {
+          return new Heroe(
+            0,
+            el.nombre,
+            el.apellido,
+            el.edad,
+            el.alterEgo,
+            el.ciudad,
+            el.publicado
+          );
+        });
+      console.log("heroes", heroes);
+
+      let villanos = buffer
+        .filter((el) => {
+          if (el.enemigo != null) {
+            return true;
+          }
+        })
+        .map((el) => {
+          return new Villano(
+            0,
+            el.nombre,
+            el.apellido,
+            el.edad,
+            el.enemigo,
+            el.robos,
+            el.asesinatos
+          );
+        });
+      console.log("villanos", villanos);
+      function insertarTabla() {
+        let tabla = "<table id='miTabla' onclick='MostrarSeleccionado()'>";
+        tabla +=
+          '<colgroup>\
+                        <col id="colid" style="visibility: visible;">\
+                        <col id="colNombre" style="visibility: visible;">\
+                        <col id="colApellido" style="visibility: visible;">\
+                        <col id="colEdad" style="visibility: visible;">\
+                        <col id="colAlterEgo" style="visibility: visible;">\
+                        <col id="colCiudad" style="visibility: visible;">\
+                        <col id="colPublicado" style="visibility: visible;">\
+                        <col id="colEnemigo" style="visibility: visible;">\
+                        <col id="colRobos" style="visibility: visible;">\
+                        <col id="colAsesinatos" style="visibility: visible;">\
+                   </colgroup>';
+        tabla +=
+          "<thead onclick='ObtenerEncabezado()'>\
+                <tr>\
+                    <th>Id</th>\
+                    <th>Nombre</th>\
+                    <th>Apellido</th>\
+                    <th>Edad</th>\
+                    <th>AlterEgo</th>\
+                    <th>Ciudad</th>\
+                    <th>Publicado</th>\
+                    <th>Enemigo</th>\
+                    <th>Robos</th>\
+                    <th>Asesinatos</th>\
+                </tr>\
+            </thead>";
+        tabla += "<tbody>";
+        let numeracionFila = 1;
+        let valorSeleccion = ValorSeleccionFiltro("cboFiltrar");
+        switch (valorSeleccion) {
+          case "1":
+            tabla += ListarHeroesEnTabla();
+            tabla += ListarVillanosEnTabla();
+            break;
+          case "2":
+            tabla += ListarHeroesEnTabla();
+            break;
+          case "3":
+            tabla += ListarVillanosEnTabla();
+            break;
+          default:
+            tabla += ListarHeroesEnTabla();
+            tabla += ListarVillanosEnTabla();
+            break;
+        }
+
+        tabla += "</tbody>";
+
+        tabla += "</table>";
+        document.getElementById("listado").innerHTML = tabla;
+      }
+      function ListarHeroesEnTabla() {
+        let listar = "";
+        heroes.forEach((e) => {
+          listar += "<tr>";
+          listar += "<td>" + e.id + "</td>";
+          listar += "<td>" + e.nombre + "</td>";
+          listar += "<td>" + e.apellido + "</td>";
+          listar += "<td>" + e.edad + "</td>";
+          listar += "<td>" + e.alterEgo + "</td>";
+          listar += "<td>" + e.ciudad + "</td>";
+          listar += "<td>" + e.publicado + "</td>";
+          listar += "<td></td>";
+          listar += "<td></td>";
+          listar += "<td></td>";
+        });
+        return listar;
+      }
+      function ListarVillanosEnTabla() {
+        let listar = "";
+        villanos.forEach((e) => {
+          listar += "<tr>";
+          listar += "<td>" + e.id + "</td>";
+          listar += "<td>" + e.nombre + "</td>";
+          listar += "<td>" + e.apellido + "</td>";
+          listar += "<td>" + e.edad + "</td>";
+          listar += "<td></td>";
+          listar += "<td></td>";
+          listar += "<td></td>";
+          listar += "<td>" + e.enemigo + "</td>";
+          listar += "<td>" + e.robos + "</td>";
+          listar += "<td>" + e.asesinatos + "</td>";
+        });
+        return listar;
+      }
+      function ValorSeleccionFiltro(idSeleccion) {
+        let mi_combobox = document.getElementById(idSeleccion);
+        let seleccionado = mi_combobox.value;
+        return seleccionado;
+      }
+
+      function CalcularPromedioEdad() {
+        let sumatoria = 0;
+        let len = 0;
+        switch (ValorSeleccionFiltro("cboFiltrar")) {
+          case "1":
+            sumatoria += heroes
+              .map((el) => {
+                return parseInt(el.edad);
+              })
+              .reduce((prev, actual) => {
+                return prev + actual;
+              }, 0);
+            len += heroes.length;
+            sumatoria += villanos
+              .map((el) => {
+                return parseInt(el.edad);
+              })
+              .reduce((prev, actual) => {
+                return prev + actual;
+              }, 0);
+            len += villanos.length;
+
+            break;
+          case "2":
+            sumatoria += heroes
+              .map((el) => {
+                return parseInt(el.edad);
+              })
+              .reduce((prev, actual) => {
+                return prev + actual;
+              }, 0);
+            len += heroes.length;
+            break;
+          case "3":
+            sumatoria += villanos
+              .map((el) => {
+                return parseInt(el.edad);
+              })
+              .reduce((prev, actual) => {
+                return prev + actual;
+              }, 0);
+            len += villanos.length;
+            break;
+        }
+        return (sumatoria / len).toFixed(2);
+      }
+      function MostrarPromedioEdad() {
+        let resultado = ValorSeleccionFiltro("cboFiltrar");
+        if (resultado != "0") {
+          let promedio = CalcularPromedioEdad();
+          document
+            .getElementById("btnCalcular")
+            .addEventListener("click", () => {
+              document.getElementById("promEdad").value = promedio;
+            });
+        } else {
+          document
+            .getElementById("btnCalcular")
+            .addEventListener("click", () => {
+              document.getElementById("promEdad").value = "seleccione filtro";
+            });
+        }
+      }
+      function valorCheckbox(idCheck, idColumna) {
+        let mi_cbox = document.getElementById(idCheck);
+        let mi_columna = document.getElementById(idColumna);
+        if (!mi_cbox.checked) {
+          mi_columna.style = "visibility: collapse;";
+        } else {
+          mi_columna.style = "visibility: visible;";
+        }
+      }
+      function PressBtnAgregar() {
+        document.getElementById("btnAgregar").addEventListener("click", () => {
+          document.getElementById("formAbm").style.display = "flex";
+
+          OcultarDiv("formDatos");
+        });
+      }
+      function MostrarDiv(idDiv) {
+        document.getElementById(idDiv).style = "display: flex";
+      }
+      function OcultarDiv(idDiv) {
+        document.getElementById(idDiv).style = "display: none";
+      }
+      function SeleccionTipoEnAbm() {
+        let tipoSeleccionado =
+          document.getElementById("cboTipo").options[
+            document.getElementById("cboTipo").selectedIndex
+          ].value;
+        if (tipoSeleccionado == 0) {
+          MostrarDiv("tipoHeroe");
+          OcultarDiv("tipoVillano");
+        } else {
+          MostrarDiv("tipoVillano");
+          OcultarDiv("tipoHeroe");
+        }
+      }
+      function GetUsuario(id) {
+        let userSeleccion = null;
+        for (let i = 0; i < heroes.length; i++) {
+          if (heroes[i].id == id) {
+            userSeleccion = new Heroe(
+              heroes[i].id,
+              heroes[i].nombre,
+              heroes[i].apellido,
+              heroes[i].edad,
+              heroes[i].alterEgo,
+              heroes[i].ciudad,
+              heroes[i].publicado
+            );
+          }
+        }
+        if (userSeleccion == null) {
+          for (let i = 0; i < villanos.length; i++) {
+            if (villanos[i].id == id) {
+              userSeleccion = new Villano(
+                villanos[i].id,
+                villanos[i].nombre,
+                villanos[i].apellido,
+                villanos[i].edad,
+                villanos[i].enemigo,
+                villanos[i].robos,
+                villanos[i].asesinatos
+              );
+            }
+          }
+        }
+        return userSeleccion;
+      }
+      function GetValue(idInput) {
+        return document.getElementById(idInput).value;
+      }
+      function ModificarHeroe(idUsuario, usuario) {
+        heroes.forEach((el) => {
+          if (idUsuario == el.id) {
+            el.nombre = usuario.nombre;
+            el.apellido = usuario.apellido;
+            el.edad = usuario.edad;
+            el.alterEgo = usuario.alterEgo;
+            el.ciudad = usuario.ciudad;
+            el.publicado = usuario.publicado;
+          }
+        });
+      }
+      function ModificarVillano(idUsuario, usuario) {
+        villanos.forEach((el) => {
+          if (idUsuario == el.id) {
+            el.nombre = usuario.nombre;
+            el.apellido = usuario.apellido;
+            el.edad = usuario.edad;
+            el.enemigo = usuario.enemigo;
+            el.robos = usuario.robos;
+            el.asesinatos = usuario.asesinatos;
+          }
+        });
+      }
+      function PressBtnAlta() {
+        let idUsuario = parseInt(document.getElementById("campoId").value);
+
+        let tipoSeleccionado =
+          document.getElementById("cboTipo").options[
+            document.getElementById("cboTipo").selectedIndex
+          ].value;
+
+        let nombre = FormatoStrings(GetValue("campoNombre"));
+        let apellido = FormatoStrings(GetValue("campoApellido"));
+        let edad = GetValue("campoEdad");
+
+        if (nombre != "" && apellido != "" && edad != "") {
+          if (tipoSeleccionado == "0") {
+            let alterEgo = FormatoStrings(GetValue("campoAlterEgo"));
+            let ciudad = FormatoStrings(GetValue("campoCiudad"));
+            let publicado = GetValue("campoPublicado");
+            
+            if (alterEgo != "" && ciudad != "" && publicado != "") {
+              let nuevoUsuario = new Heroe(
+                0,
+                nombre,
+                apellido,
+                edad,
+                alterEgo,
+                ciudad,
+                publicado
+              );
+              heroes.push(nuevoUsuario);
+            }
+          } else {
+            if ((tipoSeleccionado = "1")) {
+              let enemigo = FormatoStrings(GetValue("campoEnemigo"));
+              let robos = GetValue("campoRobos");
+              let asesinatos = GetValue("campoAsesinatos");
+              if (enemigo != "" && robos != "" && asesinatos != "") {
+                let nuevoUsuario = new Villano(
+                  0,
+                  nombre,
+                  apellido,
+                  edad,
+                  enemigo,
+                  robos,
+                  asesinatos
+                );
+                villanos.push(nuevoUsuario);
+              }
+            }
+          }
+        }
+        insertarTabla();
+        document.getElementById("formDatos").style.display = "flex";
+        OcultarDiv("formAbm");
+        CambiarValuesAbmTodos();
+      }
+      function PressBtnModificar() {
+        let idUsuario = parseInt(document.getElementById("campoId").value);
+        let usuario = GetUsuario(idUsuario);
+
+        if (usuario != null) {
+          if (usuario instanceof Heroe) {
+            let userBuffer = new Heroe(
+              usuario.id,
+              FormatoStrings(GetValue("campoNombre")),
+              FormatoStrings(GetValue("campoApellido")),
+              GetValue("campoEdad"),
+              GetValue("campoAlterEgo"),
+              GetValue("campoCiudad"),
+              GetValue("campoPublicado")
+            );
+            ModificarHeroe(idUsuario, userBuffer);
+          } else {
+            if (usuario instanceof Villano) {
+              let userBuffer = new Villano(
+                usuario.id,
+                FormatoStrings(GetValue("campoNombre")),
+                FormatoStrings(GetValue("campoApellido")),
+                GetValue("campoEdad"),
+                GetValue("campoEnemigo"),
+                GetValue("campoRobos"),
+                GetValue("campoAsesinatos")
+              );
+              ModificarVillano(idUsuario, userBuffer);
+            }
+          }
+        }
+        insertarTabla();
+        document.getElementById("formDatos").style.display = "flex";
+        OcultarDiv("formAbm");
+        CambiarValuesAbmTodos();
+      }
+      function PressBtnCancelar() {
+        insertarTabla();
+        document.getElementById("formDatos").style.display = "flex";
+        OcultarDiv("formAbm");
+        CambiarValuesAbmTodos();
+      }
+      function PressBtnEliminarUsuario() {
+        let idUsuario = parseInt(document.getElementById("campoId").value);
+        let tipoSeleccionado =
+          document.getElementById("cboTipo").options[
+            document.getElementById("cboTipo").selectedIndex
+          ].value;
+        if (tipoSeleccionado == "0") {
+          EliminarUsuario(idUsuario, heroes);
+        } else {
+          if (tipoSeleccionado == "1") {
+            EliminarUsuario(idUsuario, villanos);
+          }
+        }
+        insertarTabla();
+        document.getElementById("formDatos").style.display = "flex";
+        OcultarDiv("formAbm");
+        CambiarValuesAbmTodos();
+      }
+      function FormatoStrings(string) {
+        let cadena = "";
+        cadena = string.toLowerCase();
+        cadena = cadena[0].toUpperCase() + cadena.substring(1);
+        return cadena;
+      }
+      function CambiarValue(idInput, valor) {
+        let v = valor;
+        document.getElementById(idInput).value = `${v}`;
+      }
+      function CambiarValuesAbmTodos() {
+        CambiarValue("campoId", "");
+        CambiarValue("campoNombre", "");
+        CambiarValue("campoApellido", "");
+        CambiarValue("campoEdad", "");
+        CambiarValue("campoAlterEgo", "");
+        CambiarValue("campoCiudad", "");
+        CambiarValue("campoPublicado", "");
+        CambiarValue("campoEnemigo", "");
+        CambiarValue("campoRobos", "");
+        CambiarValue("campoAsesinatos", "");
+
+        OcultarDiv("tipoHeroe");
+        OcultarDiv("tipoVillano");
+      }
+      function EliminarUsuario(idUsuario, array) {
+        for (let i = 0; i < array.length; i++) {
+          if (array[i].id == idUsuario) {
+            array.splice(i, 1);
+          }
+        }
+      }
+      function MostrarSeleccionado() {
+        let celdas = document.querySelectorAll("td");
+        celdas.forEach(function (celda) {
+          celda.addEventListener("click", function () {
+            // Obtenego la fila correspondiente a la celda clickeada
+            let fila = celda.parentNode;
+            // Obtenego el valor de la primera celda de la fila
+            let valor = parseInt(fila.cells[0].innerText);
+
+            let usuario = GetUsuario(valor);
+            document.getElementById("formAbm").style.display = "flex";
+            document.getElementById("formDatos").style.display = "none";
+
+            CambiarValue("campoId", parseInt(usuario.id));
+            CambiarValue("campoNombre", usuario.nombre);
+            CambiarValue("campoApellido", usuario.apellido);
+            CambiarValue("campoEdad", usuario.edad);
+            if (usuario instanceof Heroe) {
+              document.getElementById("cboTipo").value = "0";
+              document.getElementById("tipoHeroe").style.display = "flex";
+              CambiarValue("campoAlterEgo", usuario.alterEgo);
+              CambiarValue("campoCiudad", usuario.ciudad);
+              CambiarValue("campoPublicado", usuario.publicado);
+            } else {
+              document.getElementById("cboTipo").value = "1";
+              document.getElementById("tipoVillano").style.display = "flex";
+              CambiarValue("campoEnemigo", usuario.enemigo);
+              CambiarValue("campoRobos", usuario.robos);
+              CambiarValue("campoAsesinatos", usuario.asesinatos);
+            }
+          });
+        });
+      }
+      function ObtenerEncabezado() {
+        let celdasEncabezado = document.querySelectorAll("#miTabla thead th");
+        // Agregar un event listener a todas las celdas del encabezado
+        celdasEncabezado.forEach(function (celda) {
+          celda.addEventListener("click", function () {
+            // Obtener el índice de la celda actual
+            let indice = celda.cellIndex;
+            // Obtener el encabezado de la columna correspondiente
+            let encabezado =
+              document.querySelector("#miTabla thead tr").cells[indice];
+            // Obtener el valor del encabezado
+            let valorEncabezado = encabezado.textContent;
+            console.log(valorEncabezado);
+            ReordenarTablaSegunSeleccion(valorEncabezado);
+            insertarTabla();
+          });
+        });
+      }
+      function ReordenarTablaSegunSeleccion(encabezado) {
+        let buffer;
+        switch (encabezado) {
+          case "Id":
+            heroes = OrdenarArrayCriterioNumerico("id", heroes);
+            villanos = OrdenarArrayCriterioNumerico("id", villanos);
+            break;
+          case "Nombre":
+            heroes = OrdenarArrayCriterioString("nombre", heroes);
+            villanos = OrdenarArrayCriterioString("nombre", villanos);
+            break;
+          case "Apellido":
+            heroes = OrdenarArrayCriterioString("apellido", heroes);
+            villanos = OrdenarArrayCriterioString("apellido", villanos);
+            break;
+          case "Edad":
+            heroes = OrdenarArrayCriterioNumerico("edad", heroes);
+            villanos = OrdenarArrayCriterioNumerico("edad", villanos);
+            break;
+          case "AlterEgo":
+            heroes = OrdenarArrayCriterioString("alterEgo", heroes);
+            break;
+          case "Ciudad":
+            heroes = OrdenarArrayCriterioString("ciudad", heroes);
+            break;
+          case "Publicado":
+            heroes = OrdenarArrayCriterioNumerico("publicado", heroes);
+            break;
+          case "Enemigo":
+            villanos = OrdenarArrayCriterioString("enemigo", villanos);
+            break;
+          case "Robos":
+            villanos = OrdenarArrayCriterioNumerico("robos", villanos);
+            break;
+          case "Asesinatos":
+            villanos = OrdenarArrayCriterioNumerico("asesinatos", villanos);
+            break;
+        }
+      }
+      function OrdenarArrayCriterioString(criterio, array) {
+        let nuevoArray = array.map((e) => e);
+        nuevoArray.sort(function (a, b) {
+          if (a[criterio] < b[criterio]) {
+            return -1;
+          } else if (a[criterio] > b[criterio]) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        return nuevoArray;
+      }
+      function OrdenarArrayCriterioNumerico(criterio, array) {
+        let nuevoArray = array.map((e) => e);
+        nuevoArray.sort((a, b) => a[criterio] - b[criterio]);
+        return nuevoArray;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arrays</title>
+</head>
+<body>
+    <script>
+        const vec = [34, 20, 45, 10];
+        //funcion concat
+        //const vec2 = vec.concat();
+        //funcion spread
+        const vec2 = [...vec];//spread operator, operador de programacion
+        const vec3 = [2, 5, 7, 8];
+
+        // for(let i=0; i<vec.length; i++)
+        // {
+        //     vec2.push(vec[i]);
+        // }
+        //funcion push
+
+        /*vec.push(20);
+        vec2.push(30);
+
+        console.log("vec",vec);
+        console.log("vec2",vec2);*/
+        //console.log(vec4);
+
+        //console.log(vec.pop());
+        //console.log(vec.shift()); 
+        // vec.forEach((elemento, indice, array)=>{
+        //     console.log(elemento, indice, array);
+        // })
+        // vec.forEach((elemento)=>{
+        //     console.log(elemento);
+        // });
+
+        const duplicados = vec.map((elemento)=>{
+            return elemento*2;
+        }); 
+
+        console.log( "vec",vec);
+        console.log("duplicados",duplicados);
+
+        const pares = vec.filter((el)=>{
+            return el % 2 == 0;
+        });
+        console.log("pares", pares);
+
+        const total = vec.reduce((prev, actual)=>{
+            return prev + actual;
+        }, 0);
+
+        // console.log("total", total);
+        // let pos = vec.indexOf(45);
+        // console.log(pos);
+
+        // vec.splice(pos,1);
+        // console.log("vec splice",vec);  
+
+        // vec.reverse(vec);
+        // console.log(vec);
+
+        vec.sort((a,b)=>{
+            return a - b;
+        });
+        console.log(vec);
+        
+
+
+
+
+    </script>
+</body>
+</html>

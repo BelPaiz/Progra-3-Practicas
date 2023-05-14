@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        table-layout: fixed;
+        width: 100% fit-content;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="cboFiltrar">Filtrar Por: </label>
+    <select
+      name=""
+      id="cboFiltrar"
+      onchange="ValorSeleccionFiltro('cboFiltrar')"
+    >
+      <option value="0">Seleccione</option>
+      <option value="1">Todos</option>
+      <option value="2">Empleados</option>
+      <option value="3">Clientes</option>
+    </select>
+    <fieldset>
+      <legend>Mostrar Columnas:</legend>
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_id"
+        checked
+        onclick="valorCheckbox('ckb_id', 'colid')"
+      />
+      Id
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_nombre"
+        checked
+        onclick="valorCheckbox('ckb_nombre', 'colNombre')"
+      />
+      Nombre
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_apellido"
+        checked
+        onclick="valorCheckbox('ckb_apellido', 'colApellido')"
+      />
+      Apellido
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_edad"
+        checked
+        onclick="valorCheckbox('ckb_edad', 'colEdad')"
+      />
+      Edad
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_ventas"
+        checked
+        onclick="valorCheckbox('ckb_ventas', 'colVentas')"
+      />
+      Ventas
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_sueldo"
+        checked
+        onclick="valorCheckbox('ckb_sueldo', 'colSueldo')"
+      />
+      Sueldo
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_compras"
+        checked
+        onclick="valorCheckbox('ckb_compras', 'colCompras')"
+      />
+      Compras
+      <input
+        type="checkbox"
+        name="atributos"
+        id="ckb_telefono"
+        checked
+        onclick="valorCheckbox('ckb_telefono', 'colTel')"
+      />
+      Telefono
+    </fieldset>
+    <br /><br />
+    <table id="miTabla" onclick="ObtenerIdTablaSeleccion()">
+      <colgroup>
+        <col
+          id="colid"
+          style="background-color: rgb(221, 255, 255); visibility: visible"
+        />
+        <col
+          id="colNombre"
+          style="background-color: rgb(217, 255, 255); visibility: visible"
+        />
+        <col
+          id="colApellido"
+          style="background-color: rgb(221, 255, 255); visibility: visible"
+        />
+        <col
+          id="colEdad"
+          style="background-color: rgb(217, 255, 255); visibility: visible"
+        />
+        <col
+          id="colVentas"
+          style="background-color: rgb(221, 255, 255); visibility: visible"
+        />
+        <col
+          id="colSueldo"
+          style="background-color: rgb(217, 255, 255); visibility: visible"
+        />
+        <col
+          id="colCompras"
+          style="background-color: rgb(221, 255, 255); visibility: visible"
+        />
+        <col
+          id="colTel"
+          style="background-color: rgb(217, 255, 255); visibility: visible"
+        />
+        <input type="text" name="username" placeholder="Username" pattern="[A-Za-z]{3,5}">
+        <input type="text" placeholder="Ingresa un caracter"  onkeypress="console.log(event.charCode)"  />
+        <br><br>
+        <input type="text" placeholder="Ingrese numero"  onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"  />
+      </colgroup>
+      <thead onclick="obtenerEncabezado()">
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Edad</th>
+          <th>Ventas</th>
+          <th>Sueldo</th>
+          <th>Compras</th>
+          <th>Telefono</th>
+        </tr>
+        <tr>
+          <td>125</td>
+          <td>126</td>
+          <td>127</td>
+          <td>128</td>
+          <td>129</td>
+          <td>130</td>
+          <td>131</td>
+          <td>132</td>
+        </tr>
+        <tr>
+          <td>133</td>
+          <td>134</td>
+          <td>135</td>
+          <td>136</td>
+          <td>137</td>
+          <td>138</td>
+          <td>139</td>
+          <td>140</td>
+        </tr>
+      </thead>
+    </table>
+</div>
+<div id="formAbm" style="display: none;">
+  <form name="formAbm">
+    <h2><label>Formulario ABM</label></h2>
+    <fieldset>
+      <legend>Datos Personales:</legend>
+      <label for="campoId">Id: </label>
+      <input type="number" id="campoId" value="" />
+      <br />
+      <label for="campoNombre">Nombre: </label>
+      <input type="text" id="campoNombre" value="" />
+      <br />
+      <label for="campoApellido">Apellido: </label>
+      <input type="text" id="campoApellido" value="" />
+      <br />
+      <label for="campoEdad">Edad: </label>
+      <input type="number" id="campoEdad" max="99" min="13" value="13" />
+    </fieldset>
+    <br />
+    <label for="cboTipo">Tipo de usuario: </label>
+    <select name="" id="cboTipo" onclick="SeleccionTipo()">
+      <option value="0">Empleado</option>
+      <option value="1">Cliente</option>
+    </select>
+    <br />
+    <br />
+
+    <div id="tipoEmpleado" style="display: none">
+      <fieldset>
+        <legend>Datos del Empleado:</legend>
+        <label for="campoVentas">Ventas: </label>
+        <input type="number" id="campoVentas" value="" />
+        <br />
+        <label for="campoSueldo">Sueldo: </label>
+        <input type="number" id="campoSueldo" value="" />
+        <br />
+      </fieldset>
+    </div>
+    <div id="tipoCliente" style="display: none">
+      <fieldset>
+        <legend>Datos del Cliente:</legend>
+        <label for="campoCompras">Compras: </label>
+        <input type="number" id="campoCompras" value="" />
+        <br />
+        <label for="campoTelefono">Telefono: </label>
+        <input type="tel" id="campoTelefono" value="" />
+        <br />
+      </fieldset>
+    </div>
+    <script>
+      function valorCheckbox(idCheck, idColumna) {
+        let mi_cbox = document.getElementById(idCheck);
+        let mi_columna = document.getElementById(idColumna);
+        if (!mi_cbox.checked) {
+          //idColumna.style = "display: none";
+          console.log("DESMARCADO");
+          console.log(mi_columna.style.visibility);
+          mi_columna.style = "visibility: collapse;";
+        } else {
+          console.log("MARCADO");
+          mi_columna.style = "visibility: visible;";
+        }
+      }
+
+      function ValorSeleccionFiltro(idSeleccion) {
+        let mi_combobox = document.getElementById(idSeleccion);
+        console.log(mi_combobox.value);
+      }
+
+      function ObtenerIdTablaSeleccion(){
+          let celdas = document.querySelectorAll('td');
+          celdas.forEach(function(celda) {
+          celda.addEventListener('click', function() {
+      // Obtenemos la fila correspondiente a la celda clickeada
+          let fila = celda.parentNode;
+
+      // Obtenemos el valor de la primera celda de la fila
+        let valor = fila.cells[0].innerText;
+        console.log('Valor de la primera celda de la fila: ' + valor);
+            });
+        });
+        }
+        function obtenerEncabezado(){
+          let celdasEncabezado = document.querySelectorAll("#miTabla thead th");
+        
+        // Agregar un event listener a todas las celdas del encabezado
+        celdasEncabezado.forEach(function (celda) {
+          celda.addEventListener("click", function () {
+            // Obtener el índice de la celda actual
+            let indice = celda.cellIndex;
+            console.log(indice);
+            // Obtener el encabezado de la columna correspondiente
+            let encabezado = document.querySelector("#miTabla thead tr").cells[indice];
+            // Obtener el valor del encabezado
+            let valorEncabezado = encabezado.textContent;
+            console.log(valorEncabezado);
+          });
+        });
+        }
+    </script>
+  </body>
+</html>

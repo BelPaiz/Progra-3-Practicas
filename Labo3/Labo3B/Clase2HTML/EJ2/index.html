@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--<script src="./scipt.js" defer></script>-->
+    <title>Funciones / Formularios</title>
+  </head>
+  <body>
+    <!--<button id="miBoton">Click me</button>-->
+    <form>
+      <label for="txtNombre">Nombre</label>
+      <input id="txtNombre" autocomplete="off" name="nombre" type="text" placeholder="Ingrese nombre"/>
+
+      <br /><br />
+
+      <label for="txtPass">Contraseña</label>
+      <input id="txtPass" name="pass" type="password" />
+
+      <br /><br />
+      
+      <label for="txtPass">Numero</label>
+      <input id="txtNumbre" max="20" min="10" name="numero" type="number" value="10"/>
+      <br /><br />
+      
+      <label for="txtPass">Numero</label>
+      <input id="txtNumbre" max="20" min="10" name="numero" type="color" value="10"/>
+      <br /><br />
+
+      <label for="txtPass">Numero</label>
+      <input id="txtNumbre" max="20" min="10" name="numero" type="date" value="10"/>
+      <br /><br />
+
+      <label for="txtPass">Numero</label>
+      <input id="txtNumbre" max="20" min="10" name="numero" type="file" value="10"/>
+      <br /><br />
+
+      <label for="txtPass">Mail</label>
+      <input id="txtNumbre"  name="mail"  type="email"/>
+      <br /><br />
+
+      <label for="txtPass">URL</label>
+      <input id="txtNumbre"  name="url" type="url" />
+      <br><br>
+      <fieldset>
+        <legend>Seleccione deporte</legend>
+        <!--al ponerles el mismo name se enlazan y solo puedo elegir uno por vez-->
+        <input type="radio" name="deporte" value="futbol"> Futbol <br>
+        <input type="radio"name="deporte" value="rugby"> Rugby <br>
+        <input type="radio"name="deporte" value="natacion"> Natacion <br>
+      </fieldset>
+      <fieldset>
+        <legend>Seleccione deporte</legend>
+        <!--al ponerles el mismo name se enlazan y solo puedo elegir uno por vez-->
+        <input type="checkbox" name="dep" value="futbol"> Futbol <br>
+        <input type="checkbox"name="dep" value="rugby"> Rugby <br>
+        <input type="checkbox"name="dep" value="natacion"> Natacion <br>
+      </fieldset>
+      
+      <BR></BR>
+      <input type="submit" value="alta usuario" />
+    </form>
+  </body>
+</html>

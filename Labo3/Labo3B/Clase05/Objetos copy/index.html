@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    <script>
+
+        class Person{
+            constructor(nombre, edad, hambre)
+            {
+                this.nombre = nombre;
+                this.edad = edad;
+                this.hambre = hambre;
+            }
+            set Nombre(value){
+                this.nombre = value;
+            }
+            get Nombre(){
+                return this.nombre;//propiedades
+            }
+            saludar(){
+                console.log("Hola me llamo", this.nombre);
+            }
+            static sumar(a,b){
+                return a+b;
+            }
+        }
+
+        class Employe extends Person{
+            constructor(legajo, nombre, edad, hambre){//puedo hacer un parametro opcional dandole un valor en los parametros
+                super(nombre, edad, hambre);
+                this.legajo = legajo;
+            }
+            saludar(){
+                console.log("Hola me llamo", this.nombre, "y mi legajo es: ", this.legajo);
+            }
+        }
+
+        const p2 = new Person("Uriel", 30, true);
+        const e2 = new Employe(1235,"Uriel", 30, true);
+
+        console.log(p2);
+        console.log(p2.Nombre); 
+        e2.saludar();
+
+        console.log(Person.sumar(5,6));
+
+
+
+    </script>
+</body>
+</html>

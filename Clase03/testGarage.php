@@ -1,5 +1,6 @@
 <?php
 include "claseGarage.php";
+$path = "altaGarage.csv";
 
 $auto1 = new Auto("Toyota", "Azul");
 $auto2 = new Auto("Toyota", "Rojo");
@@ -16,7 +17,11 @@ echo $garage1->Add($auto1);
 echo $garage1->Add($auto2);
 echo $garage1->Add($auto3);
 $garage1->MostrarGarage();
-echo $garage1->Remove($auto1);
-$garage1->MostrarGarage();
+//echo $garage1->Remove($auto1);
+//$garage1->MostrarGarage();
+
+Garage:: AltaGarage($garage1, $path);
+$arrayGarage = Garage:: LeerGarageDeCsv($path);
+Garage:: MostrarGarage($arrayGarage);
 
 ?>
